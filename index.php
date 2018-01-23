@@ -35,6 +35,29 @@
 
 
 <?php
+
+$num_of_lists = 0;
+
+//Get Lists:
+require_once('connect.php');
+
+if(mysqli_connect_errno()) {
+  echo "error" . mysqli_connect_error();
+} else {
+  $query = 'SELECT * FROM lists;';
+  $result = mysqli_query($connection, $query);
+  // $num_of_lists = sizeOf($result);
+}
+
+while($row = mysqli_fetch_array($result)) {
+  $title = $row["title"];
+  $id = $row["id"];
+
+  echo "<div class='list' id='list$id'>$title ($id)</div><br>";
+
+}
+
+//Get tasks:
 require_once('connect.php');
 
 if(mysqli_connect_errno()) {
@@ -47,12 +70,30 @@ if(mysqli_connect_errno()) {
 while($row = mysqli_fetch_array($result)) {
   $title = $row["title"];
   $description = $row["description"];
+  $list_id = $row["list_id"];
 
-  echo "<div class='box'>$title: $description</div><br>";
+  ?>
 
-}
+  <script>
+    var title = <?php echo json_encode($title); ?>;
+    var description = <?php echo json_encode($description); ?>;
+    var list_id = <?php echo json_encode($list_id); ?>;
+
+    $('#list' + list_id).append('<div class="box">title:' + title + '</div>');
+
+    //oh man this is nuts we actually found a good reason to do it in this janky way.
+  </script>
+
+  <?php
+
+  // echo "<div class='box'>$title: $description ($list_id)</div><br>";
+
+} //close While loop
+
+// $var = 'hi Var';
 
 ?>
+
 
 </body>
 </html>
