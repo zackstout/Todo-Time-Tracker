@@ -15,7 +15,7 @@
       $created = $_POST["created_at"];
       echo "$name: $text";
 
-      $query = "INSERT INTO todos_todo (id, title, test, created_at) VALUES (NULL, ?, ?, NOW());";
+      $query = "INSERT INTO todos (id, title, test, created_at) VALUES (NULL, ?, ?, NOW());";
 
       $stmt = mysqli_prepare($connection, $query);
 

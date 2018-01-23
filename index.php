@@ -27,18 +27,18 @@ require_once('connect.php');
 if(mysqli_connect_errno()) {
   echo "error" . mysqli_connect_error();
 } else {
-  $query = 'SELECT * FROM todos_todo;';
+  $query = 'SELECT * FROM todos;';
   $result = mysqli_query($connection, $query);
 }
 
 while($row = mysqli_fetch_array($result)) {
-  $name = $row["title"];
-  $text = $row["test"];
-  $time = $row["created_at"];
-  $cleantime = substr($time, 0, 19);
+  $title = $row["title"];
+  $description = $row["description"];
+  // $time = $row["created_at"];
+  // $cleantime = substr($time, 0, 19);
 
-  echo "<p>$name: $text</p>";
-  echo "<p>&emsp;Created at: $cleantime</p>";
+  echo "<p>$title: $description</p>";
+  // echo "<p>&emsp;Created at: $cleantime</p>";
   // print_r($name);
   // echo("<script>console.log('PHP: $text');</script>");
 }
