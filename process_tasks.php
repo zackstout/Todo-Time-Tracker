@@ -9,17 +9,19 @@
 
     require_once('connect.php');
 
+// Post task
     if(isset($_POST['sub'])) {
-      $name = $_POST["title"];
-      $text = $_POST["test"];
-      $created = $_POST["created_at"];
-      echo "$name: $text";
+      //The string in quotes has to match what its named on the index:
+      $title = $_POST["title"];
+      $description = $_POST["description"];
 
-      $query = "INSERT INTO todos (id, title, test, created_at) VALUES (NULL, ?, ?, NOW());";
+      // echo "$title: $description";
+
+      $query = "INSERT INTO todos (id, title, description) VALUES (NULL, ?, ?);";
 
       $stmt = mysqli_prepare($connection, $query);
 
-      mysqli_stmt_bind_param($stmt, "ss", $name, $text);
+      mysqli_stmt_bind_param($stmt, "ss", $title, $description);
 
       mysqli_stmt_execute($stmt);
 
@@ -40,6 +42,8 @@
     } else {
       echo 'error';
     }
+
+
 
      ?>
 

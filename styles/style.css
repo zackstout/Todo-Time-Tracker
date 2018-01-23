@@ -1,0 +1,12 @@
+
+.box {
+  height: 100px;
+  width: 200px;
+  background-color: gray;
+}
+
+
+.list {
+  background-color: blue;
+  width: 350px;
+}
